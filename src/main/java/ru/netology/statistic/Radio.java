@@ -57,4 +57,9 @@ public class Radio {
         return currentChannel;
     }
 
+    public int getAnyChannel(int anyChannel) {
+        setCurrentChannel(anyChannel);
+        return currentChannel;
+    }
+
 }
