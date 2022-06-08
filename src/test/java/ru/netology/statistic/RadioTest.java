@@ -5,104 +5,104 @@ import org.junit.jupiter.api.Test;
 
 public class RadioTest {
 
+    Radio radio = new Radio();
+
     @Test
-    void increaseVolume() {
-        Radio radio = new Radio();
-        radio.setCurrentVolume(9);
-        radio.increaseVolume();
-        int actual = radio.getCurrentVolume();
+    void setQuanityChannel(){
+        Radio radio = new Radio(10);
+        int actual = radio.getChannelQuantity();
         int expected = 10;
-        Assertions.assertEquals(actual, expected);
+        Assertions.assertEquals(expected,actual);
+    }
+
+
+    @Test
+    void setMinChannel(){
+        radio.setAnyChannel(-1);
+        int actual = radio.getCurrentChannel();
+        int expected = 0;
+        Assertions.assertEquals(actual,expected);
     }
 
     @Test
-    void maxVolume() {
-        Radio radio = new Radio();
-        radio.setCurrentVolume(10);
-        radio.increaseVolume();
-        int actual = radio.getCurrentVolume();
-        int expected = 10;
-        Assertions.assertEquals(actual, expected);
+    void setMaxChannel(){
+        radio.setAnyChannel(10);
+        int actual = radio.getCurrentChannel();
+        int expected =0;
+        Assertions.assertEquals(expected,actual);
     }
 
     @Test
-    void minVolume() {
-        Radio radio = new Radio();
+    void setNextChannel(){
+        radio.setCurrentChannel(8);
+        radio.nextChannel();
+        int actual = radio.getCurrentChannel();
+        int expected = 9;
+        Assertions.assertEquals(expected,actual);
+    }
+
+
+    @Test
+    void setPrevChannel(){
+        radio.setCurrentChannel(1);
+        radio.prevChannel();
+        int actual = radio.getCurrentChannel();
+        int expected = 0;
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    void setUnderMaxChannel(){
+        radio.setCurrentChannel(9);
+        radio.nextChannel();
+        int actual = radio.getCurrentChannel();
+        int expected = 0;
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    void setUnderMinChannel(){
+        radio.setCurrentChannel(0);
+        radio.prevChannel();
+        int actual = radio.getCurrentChannel();
+        int expected = 9;
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    void increaseVolume(){
+        radio.setCurrentVolume(15);
+        radio.increaseVolume();
+        int actual = radio.getCurrentVolume();
+        int expected = 16;
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    void decreaseVolume(){
+        radio.setCurrentVolume(15);
+        radio.decreaseVolume();
+        int actual = radio.getCurrentVolume();
+        int expected = 14;
+        Assertions.assertEquals(expected,actual);
+    }
+
+
+    @Test
+    void increaseVolumeMax(){
+        radio.setCurrentVolume(100);
+        radio.increaseVolume();
+        int actual = radio.getCurrentVolume();
+        int expected = 100;
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    void decreaseVolumeMin(){
         radio.setCurrentVolume(0);
         radio.decreaseVolume();
         int actual = radio.getCurrentVolume();
         int expected = 0;
-        Assertions.assertEquals(actual, expected);
-    }
-
-    @Test
-    void maxChannel() {
-        Radio radio = new Radio();
-        radio.setCurrentChannel(9);
-        radio.nextChanel();
-        int actual = radio.getCurrentChannel();
-        int expected = 0;
-        Assertions.assertEquals(actual, expected);
-    }
-
-    @Test
-    void nextChannel() {
-        Radio radio = new Radio();
-        radio.setCurrentChannel(8);
-        radio.nextChanel();
-        int actual = radio.getCurrentChannel();
-        int expected = 9;
-        Assertions.assertEquals(actual, expected);
-    }
-
-    @Test
-    void minChannel() {
-        Radio radio = new Radio();
-        radio.setCurrentChannel(0);
-        radio.prevChanel();
-        int actual = radio.getCurrentChannel();
-        int expected = 9;
-        Assertions.assertEquals(actual, expected);
-    }
-
-    @Test
-    void anyChannel() {
-        Radio radio = new Radio();
-        radio.getAnyChannel(-5);
-        radio.getAnyChannel(33);
-        radio.getAnyChannel(5);
-        int actual = radio.getCurrentChannel();
-        int expected = 5;
-        Assertions.assertEquals(expected, actual);
-    }
-    @Test
-    void prevVolume(){
-        Radio radio = new Radio();
-        radio.setCurrentVolume(5);
-        radio.decreaseVolume();
-        int actual = radio.getCurrentVolume();
-        int expected = 4;
-        Assertions.assertEquals(expected,actual);
-
-    }
-
-    @Test
-    void prevChannel(){
-        Radio radio = new Radio();
-        radio.setCurrentChannel(5);
-        radio.prevChanel();
-        int actual = radio.getCurrentChannel();
-        int expected = 4;
-        Assertions.assertEquals(expected,actual);
-    }
-    @Test
-    void anyVolume(){
-        Radio radio = new Radio();
-        radio.setCurrentVolume(-4);
-        radio.setCurrentVolume(22);
-        radio.setCurrentVolume(4);
-        int actual = radio.getCurrentVolume();
-        int expected =4;
         Assertions.assertEquals(expected,actual);
     }
 }

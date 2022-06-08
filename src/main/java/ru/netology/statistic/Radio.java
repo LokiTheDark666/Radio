@@ -4,62 +4,82 @@ public class Radio {
 
     private int currentVolume;
     private int currentChannel;
+    private int channelQuantity;
 
-    public void setCurrentVolume(int newCurrentVolume) {
-        if (newCurrentVolume < 0) {
+    public Radio(int channelQuantity)
+    {
+       this.channelQuantity = channelQuantity;
+    }
+
+    public Radio() {
+        this.channelQuantity = 10;
+    }
+
+    public void setCurrentChannel(int currentChannel) {
+        if (currentChannel < 0) {
             return;
         }
-        if (newCurrentVolume > 10) {
+        if (currentChannel >= channelQuantity) {
             return;
         }
-        currentVolume = newCurrentVolume;
+        this.currentChannel = currentChannel;
     }
 
-    public void increaseVolume() {
-        if (currentVolume < 10) {
-            currentVolume = currentVolume + 1;
-        }
-    }
-
-    public void decreaseVolume() {
-        if (currentVolume > 0) {
-            currentVolume = currentVolume - 1;
-        }
-    }
-
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-
-    public void setCurrentChannel(int newCurrentChannel) {
-        if (newCurrentChannel < 0) {
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume < 0) {
             return;
         }
-        if (newCurrentChannel > 9) {
+        if (currentVolume > 100) {
             return;
         }
-        currentChannel = newCurrentChannel;
+        this.currentVolume = currentVolume;
     }
 
-    public void nextChanel() {
-        if (currentChannel < 9) {
-            currentChannel = currentChannel + 1;
-        } else currentChannel = 0;
+    public void setAnyChannel(int newChannel) {
+        setCurrentChannel(newChannel);
     }
 
-    public void prevChanel() {
-        if (currentChannel > 0) {
-            currentChannel = currentChannel - 1;
-        } else currentChannel = 9;
+    public int getChannelQuantity() {
+        return channelQuantity;
     }
 
     public int getCurrentChannel() {
         return currentChannel;
     }
 
-    public int getAnyChannel(int anyChannel) {
-        setCurrentChannel(anyChannel);
-        return currentChannel;
+    public int getCurrentVolume() {
+        return currentVolume;
     }
 
+    public void nextChannel() {
+        int newCurrentChannel;
+        if (currentChannel < channelQuantity - 1) {
+            newCurrentChannel = currentChannel + 1;
+        } else {
+            newCurrentChannel = 0;
+        }
+        setCurrentChannel(newCurrentChannel);
+    }
+
+    public void prevChannel() {
+        int newCurrentChannel;
+        if (currentChannel > 0) {
+            newCurrentChannel = currentChannel - 1;
+        } else {
+            newCurrentChannel = channelQuantity - 1;
+        }
+        setCurrentChannel(newCurrentChannel);
+    }
+
+    public void increaseVolume(){
+        int newCurrentVolume = currentVolume+1;
+        setCurrentVolume(newCurrentVolume);
+    }
+
+    public void decreaseVolume(){
+        int newCurrentVolume = currentVolume-1;
+        setCurrentVolume(newCurrentVolume);
+    }
 }
+
+
